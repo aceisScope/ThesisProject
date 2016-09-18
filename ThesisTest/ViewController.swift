@@ -55,7 +55,7 @@ class ViewController: UIViewController {
         defaults.set(true, forKey: "Init")
     }
     
-    func fetchRecordsBasedOnID(_ id: NSString) {
+    func fetchLogsBasedOnID(_ id: NSString) {
         let predicate = NSPredicate(format: "objectID == %@",id)
         let request: NSFetchRequest<Translog> = Translog.fetchRequest()
         request.predicate = predicate
@@ -67,6 +67,13 @@ class ViewController: UIViewController {
         }
     }
     
-    
+    func removeLog(_ log: Translog) {
+        do {
+            backgroundContext.delete(log)
+            backgroundContext.save()
+        } catch  {
+            print("Error with request: \(error)")
+        }
+    }
 }
 
