@@ -509,6 +509,7 @@
 				049EB1021D8E885300DB42F4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		049EB1031D8E885300DB42F4 /* Build configuration list for PBXNativeTarget "ThesisTestTests" */ = {
 			isa = XCConfigurationList;
@@ -517,6 +518,7 @@
 				049EB1051D8E885300DB42F4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		049EB1061D8E885300DB42F4 /* Build configuration list for PBXNativeTarget "ThesisTestUITests" */ = {
 			isa = XCConfigurationList;
@@ -525,6 +527,7 @@
 				049EB1081D8E885300DB42F4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
