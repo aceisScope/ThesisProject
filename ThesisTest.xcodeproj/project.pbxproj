@@ -196,6 +196,7 @@
 				TargetAttributes = {
 					049EB0D41D8E885100DB42F4 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 2FHM7HPPY9;
 						ProvisioningStyle = Automatic;
 					};
 					049EB0EB1D8E885300DB42F4 = {
@@ -416,6 +417,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 2FHM7HPPY9;
 				INFOPLIST_FILE = ThesisTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.personal.Katze.ThesisTest;
@@ -428,6 +430,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 2FHM7HPPY9;
 				INFOPLIST_FILE = ThesisTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.personal.Katze.ThesisTest;
