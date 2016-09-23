@@ -34,7 +34,9 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate, UITa
         createInitialDataSet()
 
         let startTime = CACurrentMediaTime()
-        fetchLogsBasedOnID("\(Int(arc4random_uniform(2000)))" as NSString)
+        let result = fetchLogsBasedOnID("\(Int(arc4random_uniform(2000)))" as String)
+        let log:Translog = result.first!
+        updateLog(log)
         let endTime = CACurrentMediaTime()
         print("total run time: \(endTime - startTime)")
 
@@ -79,16 +81,18 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate, UITa
         defaults.set(true, forKey: "Init")
     }
     
-    func fetchLogsBasedOnID(_ id: NSString) {
+    func fetchLogsBasedOnID(_ id: String) -> [Translog] {
         let predicate = NSPredicate(format: "id == %@",id)
         let request: NSFetchRequest<Translog> = Translog.fetchRequest()
         request.predicate = predicate
         do {
             let searchResults = try backgroundContext.fetch(request)
-            //print(searchResults)
+            return searchResults
         } catch {
             print("Error with request: \(error)")
         }
+
+        return []
     }
     
     func removeLog(_ log: Translog) {
@@ -100,6 +104,20 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate, UITa
         }
     }
 
+    func updateLog(_ log: Translog) {
+        do {
+            let action = Int16(Int(arc4random_uniform(3)))
+            log.action = action
+            if action == 1 {
+                log.field = ""
+            }
+            log.date = NSDate()
+
+            try backgroundContext.save()
+        } catch {
+            print("Error with request: \(error)")
+        }
+    }
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
