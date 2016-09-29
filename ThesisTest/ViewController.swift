@@ -33,19 +33,19 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate, UITa
 
         createInitialDataSet()
 
+         let fetchRequest: NSFetchRequest<Translog> = Translog.fetchRequest()
+         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true, selector: #selector(NSString.localizedStandardCompare(_:)))]
+         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: mainContext, sectionNameKeyPath: nil, cacheName: nil)
+         fetchedResultsController.delegate = self
+         _ = try? fetchedResultsController.performFetch()
+
+
         let startTime = CACurrentMediaTime()
-        let result = fetchLogsBasedOnID("\(Int(arc4random_uniform(2000)))" as String)
-        let log:Translog = result.first!
-        updateLog(log)
+        for _ in  1...1000 {
+            updateLogBasedOnID("\(Int(arc4random_uniform(2000)))" as String)
+        }
         let endTime = CACurrentMediaTime()
         print("total run time: \(endTime - startTime)")
-
-        let fetchRequest: NSFetchRequest<Translog> = Translog.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true, selector: #selector(NSString.localizedStandardCompare(_:)))]
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: mainContext, sectionNameKeyPath: nil, cacheName: nil)
-        fetchedResultsController.delegate = self
-        _ = try? fetchedResultsController.performFetch()
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -119,12 +119,39 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate, UITa
         }
     }
 
+    func updateLogBasedOnID(_ id: String) {
+        let predicate = NSPredicate(format: "id == %@",id)
+        let request: NSFetchRequest<Translog> = Translog.fetchRequest()
+        request.predicate = predicate
+
+        let context: NSManagedObjectContext! = backgroundContext;
+        context.performAndWait {
+            let searchResults = try? context.fetch(request)
+            if searchResults?.count == 0 {
+                return
+            }
+            let log:Translog = searchResults!.first!
+
+            let action = Int16(Int(arc4random_uniform(3)))
+            log.action = action
+            if action == 1 {
+                log.field = ""
+            }
+            log.date = NSDate()
+
+            _ = try? context.save()
+        }
+    }
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fetchedResultsController.sections![0].numberOfObjects
+        if fetchedResultsController.sections != nil {
+            return fetchedResultsController.sections![0].numberOfObjects
+        }
+        return 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
