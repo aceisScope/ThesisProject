@@ -41,8 +41,8 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate, UITa
 
 
         let startTime = CACurrentMediaTime()
-        for _ in  1...1000 {
-            updateLogBasedOnID("\(Int(arc4random_uniform(2000)))" as String)
+        for i in  1...1000 {
+            removeLogBasedOnID("\(Int(i))" as String)
         }
         let endTime = CACurrentMediaTime()
         print("total run time: \(endTime - startTime)")
@@ -101,6 +101,24 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate, UITa
             try backgroundContext.save()
         } catch  {
             print("Error with request: \(error)")
+        }
+    }
+
+    func removeLogBasedOnID(_ id: String)  {
+        let predicate = NSPredicate(format: "id == %@",id)
+        let request: NSFetchRequest<Translog> = Translog.fetchRequest()
+        request.predicate = predicate
+
+        let context: NSManagedObjectContext! = backgroundContext;
+        context.performAndWait {
+            let searchResults = try? context.fetch(request)
+            if searchResults?.count == 0 {
+                return
+            }
+            let log:Translog = searchResults!.first!
+
+            context.delete(log)
+            _ = try? context.save()
         }
     }
 
@@ -173,16 +191,12 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate, UITa
 
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         //print("insert into \(newIndexPath?.row)")
-
-        guard let indexPathTemp = newIndexPath else {
-            return
-        }
         switch type {
         case .insert:
-            tableView.insertRows(at: [indexPathTemp], with: .none)
+            tableView.insertRows(at: [newIndexPath!], with: .none)
             break
         case .update:
-            tableView.reloadRows(at: [indexPathTemp], with: .none)
+            tableView.reloadRows(at: [newIndexPath!], with: .none)
             break
         case .delete:
             tableView.deleteRows(at: [indexPath!], with: .none)
