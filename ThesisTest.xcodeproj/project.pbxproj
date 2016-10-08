@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		048E4DD81DA82F7F00EC77D4 /* ProcessModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E4DD71DA82F7F00EC77D4 /* ProcessModule.swift */; };
 		049EB0D91D8E885200DB42F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049EB0D81D8E885200DB42F4 /* AppDelegate.swift */; };
 		049EB0DB1D8E885200DB42F4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049EB0DA1D8E885200DB42F4 /* ViewController.swift */; };
 		049EB0DE1D8E885300DB42F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 049EB0DC1D8E885300DB42F4 /* Main.storyboard */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		048E4DD71DA82F7F00EC77D4 /* ProcessModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessModule.swift; sourceTree = "<group>"; };
 		049EB0D51D8E885200DB42F4 /* ThesisTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThesisTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		049EB0D81D8E885200DB42F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		049EB0DA1D8E885200DB42F4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				049EB0E41D8E885300DB42F4 /* LaunchScreen.storyboard */,
 				049EB0E71D8E885300DB42F4 /* Info.plist */,
 				049EB0DF1D8E885300DB42F4 /* ThesisTest.xcdatamodeld */,
+				048E4DD71DA82F7F00EC77D4 /* ProcessModule.swift */,
 			);
 			path = ThesisTest;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 				049EB0E11D8E885300DB42F4 /* ThesisTest.xcdatamodeld in Sources */,
 				049EB0DB1D8E885200DB42F4 /* ViewController.swift in Sources */,
 				049EB0D91D8E885200DB42F4 /* AppDelegate.swift in Sources */,
+				048E4DD81DA82F7F00EC77D4 /* ProcessModule.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
